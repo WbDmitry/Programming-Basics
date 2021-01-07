@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Личный сайт студента GeekBrains</title>
+	<link rel="stylesheet" href="style.css"> 
+	<script type="text/javascript">
+
+		var answer = parseInt(Math.random() * 100);
+		var player = 1;
+
+		function readInt(){
+			var number = document.getElementById("userAnswer").value;
+			return parseInt(number);
+			// return +document.getElementById("userAnswer").value;
+		}
+
+		function write(text){
+			document.getElementById("info").innerHTML = text;
+		}
+
+		function writePlayer(textplayer){
+			document.getElementById("infoPlayer").innerHTML = "Ход переходит к игроку под номером: " + player;
+		}
+
+		function hide(id){
+			document.getElementById(id).style.display = "none";
+		}
+
+		function switchPlayer () {
+			if (player == 1) {
+				player = 2;
+			}else {
+				player = 1;
+			}
+		}
+
+		function guess(){
+			var userAnswer = readInt();
+			if(userAnswer == answer){
+				write("<b>Поздравляю, игрок под номером " + player + " угадал!</b>");				
+				hide("button");
+				hide("userAnswer");
+				hide("infoPlayer");
+			} else if(userAnswer > answer){
+				switchPlayer();
+				write("Вы ввели слишком большое число<br>Попробуйте еще раз. Введите число от 1 до 100");
+				writePlayer();				
+			} else if(userAnswer < answer){
+				switchPlayer();
+				write("Вы ввели слишком маленькое число<br>Попробуйте еще раз. Введите число от 1 до 100");				
+				writePlayer();				
+			}
+		}
+	</script>
+</head>
+<body>
+<div class="content">
+	<div class="header">
+		<a href="index.html">Главная</a>
+		<a href="puzzle.html">Загадки</a>
+		<a href="guess.html">Угадайка</a>
+		<a href="#">Угадайка для двоих</a>
+		<a href="gen_password.html">Генератор паролей</a>
+	</div>
+	<div class="contentWrap">
+		<div class="content">
+			<div class="center">
+				<h1>Игра Угадайка для двоих</h1>
+				<div class="box">
+					<p id="info">Угадайте число от 0 до 100</p>
+					<p id="infoPlayer">Ход ингрока под номером: 1</p>
+					<input type="text" id="userAnswer">
+					<br>
+					<a href="#" onClick="guess();" id="button">Начать</a>				
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="footer">
+	Copyright &copy; Dmitry
+<div>
+</body>
+</html>
